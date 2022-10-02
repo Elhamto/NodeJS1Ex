@@ -33,7 +33,6 @@ router.route("/")
     await userExist(username, res);
 
     const [err, userObj] = await getState(username);
-    console.log(userObj)
     if(err){
         return res.status(500).json({
             "err": err.message
