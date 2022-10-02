@@ -33,12 +33,14 @@ router.route("/")
     await userExist(username, res);
 
     const [err, userObj] = await getState(username);
+    console.log(userObj)
     if(err){
         return res.status(500).json({
             "err": err.message
         })
     }
     else if(userObj){   //bug: poshte ham k request bezani hamun azmun ro poshte ham tekrar mikone
+        // dakhele query bayad user o state ro bedi ta befahme
         db.all(`SELECT Quizes.question_id, question, option1, option2, option3, option4 FROM Questions
                 INNER JOIN Quizes ON Questions.question_id = Quizes.question_id`, (err, row) => {
                     if(err){
